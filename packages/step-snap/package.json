@@ -1,0 +1,7 @@
+{
+  "name": "step-snap",
+  "version": "1.0.0",
+  "description": "Automatically capture a user's browser interactions as step-by-step annotated screenshots.",
+  "private": true,
+  "type": "module"
+}
