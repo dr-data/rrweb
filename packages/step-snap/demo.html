@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StepSnap Demo Page</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; line-height: 1.6; }
+        .card { padding: 20px; border: 1px solid #ccc; border-radius: 8px; background: #f9f9f9; }
+        button { padding: 10px 15px; margin: 5px 0; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        input[type="text"] { padding: 8px; width: 100%; margin-bottom: 15px; box-sizing: border-box; }
+        label { font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>StepSnap Demo Application</h1>
+    <p>This page contains interactive elements to test the StepSnap extension.</p>
+
+    <div class="card">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Enter your username">
+
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" placeholder="Enter your email address" aria-label="Email Address Field">
+
+        <button id="submitBtn">Submit Form</button>
+        <button id="cancelBtn" style="background: #dc3545;">Cancel</button>
+    </div>
+
+    <p style="margin-top: 30px;">
+        <a href="#" id="linkItem">Click this link</a> to test link tracking.
+    </p>
+
+    <div style="margin-top: 30px;" id="output"></div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', () => {
+            const user = document.getElementById('username').value;
+            document.getElementById('output').innerHTML = `<strong>Form submitted!</strong> Welcome, ${user || 'Guest'}.`;
+        });
+        document.getElementById('cancelBtn').addEventListener('click', () => {
+            document.getElementById('output').innerHTML = '<em>Action cancelled.</em>';
+            document.getElementById('username').value = '';
+            document.getElementById('email').value = '';
+        });
+        document.getElementById('linkItem').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('output').innerHTML = 'Link clicked!';
+        });
+    </script>
+</body>
+</html>
