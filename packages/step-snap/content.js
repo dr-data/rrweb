@@ -1,6 +1,7 @@
 if (!window.__stepsnap_injected) {
   window.__stepsnap_injected = true;
 
+  const DEBUG = true; // Set to false to disable console logs
   let recording = false;
   let paused = false;
   let stopRrweb = null;
@@ -16,6 +17,7 @@ if (!window.__stepsnap_injected) {
     if (!recording || paused) return;
 
     const targetDesc = describeTarget(e.target);
+    if (DEBUG) console.log('[StepSnap Content] Captured click on:', targetDesc);
     const x = e.clientX;
     const y = e.clientY;
 

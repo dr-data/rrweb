@@ -37,9 +37,11 @@
     <script>
         document.getElementById('submitBtn').addEventListener('click', () => {
             const user = document.getElementById('username').value;
+            console.log('[Demo] Form submitted by:', user);
             document.getElementById('output').innerHTML = `<strong>Form submitted!</strong> Welcome, ${user || 'Guest'}.`;
         });
         document.getElementById('cancelBtn').addEventListener('click', () => {
+            console.log('[Demo] Cancel button clicked');
             document.getElementById('output').innerHTML = '<em>Action cancelled.</em>';
             document.getElementById('username').value = '';
             document.getElementById('email').value = '';

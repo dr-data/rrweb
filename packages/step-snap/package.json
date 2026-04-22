@@ -5,6 +5,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test:e2e": "node e2e.test.js"
+    "test:e2e": "npx serve -l 5000 & node e2e.test.js"
+  },
+  "devDependencies": {
+    "puppeteer": "^24.42.0",
+    "serve": "^14.2.6"
   }
 }

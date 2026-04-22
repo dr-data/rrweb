@@ -1,6 +1,8 @@
 import { saveGuide } from './storage.js';
 import { annotateScreenshot } from './annotate.js';
 
+const DEBUG = true; // Set to false to disable console logs
+
 const recordingState = new Map(); // tabId -> { steps, recording, paused, rrwebEvents }
 
 function createScreenshotOffscreen(base64Raw, x, y, stepNumber) {
@@ -11,6 +13,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   const tabId = sender?.tab?.id || message.tabId;
 
   if (message.type === 'START_RECORDING') {
+    if (DEBUG) console.log('[StepSnap Background] Starting recording on tab:', tabId);
     recordingState.set(tabId, { steps: [], recording: true, paused: false, rrwebEvents: [] });
     // Inject content script if not already injected
     chrome.scripting.executeScript({
@@ -60,6 +63,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     const state = recordingState.get(tabId);
     if (!state || state.paused) return;
 
+    if (DEBUG) console.log('[StepSnap Background] Adding step for click on:', message.target);
     const stepNumber = state.steps.length + 1;
     const { x, y, target, pageTitle, pageURL } = message;
 
@@ -148,6 +152,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         rrwebEvents: state.rrwebEvents,
         coverThumbnail: state.steps[0].screenshotAnnotated
      };
+     if (DEBUG) console.log('[StepSnap Background] Saving guide with ID:', guide.id, 'and steps:', guide.steps.length);
      saveGuide(guide).then(() => {
         recordingState.delete(message.tabId);
         chrome.tabs.create({ url: `editor.html?guideId=${guide.id}` });

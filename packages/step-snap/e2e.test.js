@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const extensionPath = __dirname;
-const demoUrl = `file://${path.join(__dirname, 'demo.html')}`;
+const demoUrl = 'http://localhost:5000/demo.html';
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
