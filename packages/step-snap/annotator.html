@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Annotation</title>
+  <style>
+    body { margin: 0; padding: 0; background: #333; display: flex; flex-direction: column; height: 100vh; font-family: sans-serif; }
+    .toolbar { background: #222; padding: 10px; display: flex; gap: 10px; align-items: center; justify-content: center; color: white; border-bottom: 1px solid #111; }
+    button { background: #444; border: 1px solid #555; color: white; padding: 5px 10px; cursor: pointer; border-radius: 4px; }
+    button:hover { background: #555; }
+    button.active { background: #2196f3; border-color: #2196f3; }
+    .color-picker { display: flex; gap: 5px; margin-left: 10px; border-left: 1px solid #555; padding-left: 10px; }
+    .color-swatch { width: 20px; height: 20px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; }
+    .color-swatch.active { border-color: white; }
+
+    .canvas-container { flex-grow: 1; overflow: auto; display: flex; align-items: center; justify-content: center; position: relative; }
+    canvas { background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAMUlEQVQ4T2NkYGAQYcAP3neSmciQAQYMBg0DBg3DMLQDAwP/EQZ+/g9y1x01DMMwDACN9x8BTaDq4AAAAABJRU5ErkJggg=='); box-shadow: 0 0 10px rgba(0,0,0,0.5); cursor: crosshair; }
+
+    .actions { border-left: 1px solid #555; padding-left: 10px; margin-left: auto; display: flex; gap: 10px; }
+    .btn-save { background: #4caf50; border-color: #4caf50; }
+    .btn-save:hover { background: #45a049; }
+    .btn-cancel { background: transparent; }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <button class="tool-btn active" data-tool="circle">Circle</button>
+    <button class="tool-btn" data-tool="arrow">Arrow</button>
+    <button class="tool-btn" data-tool="rect">Highlight</button>
+    <button class="tool-btn" data-tool="text">Text</button>
+    <button class="tool-btn" data-tool="blur">Blur</button>
+
+    <div class="color-picker" id="colorPicker">
+        <div class="color-swatch active" style="background: red;" data-color="red"></div>
+        <div class="color-swatch" style="background: orange;" data-color="orange"></div>
+        <div class="color-swatch" style="background: yellow;" data-color="yellow"></div>
+        <div class="color-swatch" style="background: green;" data-color="green"></div>
+        <div class="color-swatch" style="background: blue;" data-color="blue"></div>
+        <div class="color-swatch" style="background: black;" data-color="black"></div>
+        <div class="color-swatch" style="background: white;" data-color="white"></div>
+    </div>
+
+    <div style="margin-left: 10px; border-left: 1px solid #555; padding-left: 10px;">
+        <button id="btnUndo">Undo</button>
+        <button id="btnRedo">Redo</button>
+        <button id="btnReset">Reset All</button>
+    </div>
+
+    <div class="actions">
+        <button class="btn-cancel" id="btnCancel">Cancel</button>
+        <button class="btn-save" id="btnSave">Save</button>
+    </div>
+  </div>
+
+  <div class="canvas-container">
+    <canvas id="mainCanvas"></canvas>
+  </div>
+
+  <script type="module" src="annotator.js"></script>
+</body>
+</html>

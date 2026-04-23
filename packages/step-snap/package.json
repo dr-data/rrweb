@@ -1,0 +1,14 @@
+{
+  "name": "step-snap",
+  "version": "1.0.0",
+  "description": "Automatically capture a user's browser interactions as step-by-step annotated screenshots.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:e2e": "npx serve -l 5000 & node e2e.test.js"
+  },
+  "devDependencies": {
+    "puppeteer": "^24.42.0",
+    "serve": "^14.2.6"
+  }
+}
